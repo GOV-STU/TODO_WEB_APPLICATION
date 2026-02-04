@@ -6,7 +6,6 @@ import { MessageList } from "./MessageList";
 import { MessageInput } from "./MessageInput";
 import { api } from "@/lib/api";
 import { toast } from "sonner";
-import { Sparkles, Loader2 } from "lucide-react";
 
 interface ChatWindowProps {
   conversationId?: string | null;
