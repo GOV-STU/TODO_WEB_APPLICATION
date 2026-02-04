@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
 import { Task, CreateTaskDto, UpdateTaskDto } from "@/types/task";
 import { api } from "@/lib/api";
 import { TaskList } from "@/components/tasks/TaskList";
