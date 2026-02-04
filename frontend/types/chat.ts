@@ -36,7 +36,7 @@ export interface ChatRequest {
 export interface ChatResponse {
   conversation_id: string;
   message_id: string;
-  role: string;
+  role: "user" | "assistant" | "system";
   content: string;
   created_at: string;
   tool_calls: ToolCallSummary[];
