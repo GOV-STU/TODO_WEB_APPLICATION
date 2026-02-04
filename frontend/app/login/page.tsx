@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/Input";
+import { Zap, Lock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
+import { ParticleBackground } from "@/components/ui/ParticleBackground";
 import { auth } from "@/lib/auth";
 import { toast } from "sonner";
 
@@ -45,11 +45,11 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await auth.login(formData.email, formData.password);
-      toast.success("Welcome back!");
+      toast.success("Neural interface connected!");
       router.push("/dashboard");
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Failed to login"
+        error instanceof Error ? error.message : "Access denied"
       );
     } finally {
       setLoading(false);
@@ -57,80 +57,123 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950 px-4">
-      <div className="w-full max-w-md">
+    <div className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+      {/* Animated Robotic Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950">
+        <ParticleBackground />
+
+        {/* Animated Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] opacity-20" />
+
+        {/* Glowing Orbs */}
+        <div className="absolute top-0 -left-4 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+        <div className="absolute top-0 -right-4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }} />
+
+        {/* Scanning Line */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent h-32 animate-scan" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="h-10 w-10 rounded-lg bg-primary-600 dark:bg-primary-500 flex items-center justify-center">
-              <span className="text-white font-bold text-xl">T</span>
+          <Link href="/" className="inline-flex flex-col items-center gap-3">
+            <div className="relative">
+              <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 border border-cyan-400/30">
+                <Zap className="h-8 w-8 text-white" />
+              </div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-400 opacity-0 group-hover:opacity-20 transition-opacity" />
             </div>
-            <span className="font-bold text-2xl text-gray-900 dark:text-gray-50">
-              Todo
-            </span>
+            <div className="text-center">
+              <span className="font-bold text-2xl bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent block">
+                NEURAL TASK
+              </span>
+              <span className="text-xs text-cyan-300/60">AI-Powered System</span>
+            </div>
           </Link>
         </div>
 
         {/* Login Card */}
-        <Card variant="elevated" padding="lg">
+        <div className="bg-slate-900/80 backdrop-blur-xl border border-cyan-500/30 rounded-2xl shadow-2xl shadow-cyan-500/20 p-8">
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-2">
-              Welcome back
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">
+              Access Neural System
             </h1>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Sign in to your account to continue
+            <p className="text-sm text-cyan-300/60">
+              Connect to your neural interface
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              label="Email"
-              type="email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              error={errors.email}
-              placeholder="you@example.com"
-              required
-            />
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-cyan-300 mb-2">
+                <Mail className="inline h-4 w-4 mr-2" />
+                Email Address
+              </label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                placeholder="user@neural.system"
+                className="w-full px-4 py-3 bg-slate-800/50 border border-cyan-500/30 rounded-lg text-cyan-100 placeholder:text-cyan-300/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400/50 transition-all"
+                required
+              />
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-400">{errors.email}</p>
+              )}
+            </div>
 
-            <Input
-              label="Password"
-              type="password"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-              error={errors.password}
-              placeholder="Enter your password"
-              required
-            />
+            <div>
+              <label className="block text-sm font-medium text-cyan-300 mb-2">
+                <Lock className="inline h-4 w-4 mr-2" />
+                Access Code
+              </label>
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+                placeholder="Enter your access code"
+                className="w-full px-4 py-3 bg-slate-800/50 border border-cyan-500/30 rounded-lg text-cyan-100 placeholder:text-cyan-300/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400/50 transition-all"
+                required
+              />
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-400">{errors.password}</p>
+              )}
+            </div>
 
-            <Button type="submit" className="w-full" loading={loading}>
-              Sign In
+            <Button
+              type="submit"
+              className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 border border-cyan-400/30 shadow-lg shadow-cyan-500/20 text-white font-medium py-3"
+              disabled={loading}
+            >
+              {loading ? "Connecting..." : "Connect to System"}
             </Button>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Don't have an account?{" "}
+            <p className="text-sm text-cyan-300/60">
+              No neural interface?{" "}
               <Link
                 href="/signup"
-                className="text-primary-600 dark:text-primary-400 hover:underline font-medium"
+                className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
               >
-                Sign up
+                Initialize Account
               </Link>
             </p>
           </div>
-        </Card>
+        </div>
 
         {/* Demo credentials */}
-        <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg border border-blue-200 dark:border-blue-800">
-          <p className="text-xs text-blue-800 dark:text-blue-300 font-medium mb-1">
-            Demo Credentials
+        <div className="mt-6 p-4 bg-blue-900/20 backdrop-blur-sm rounded-lg border border-blue-500/30">
+          <p className="text-xs text-blue-300 font-medium mb-2 flex items-center gap-2">
+            <Zap className="h-3 w-3" />
+            Demo Access Credentials
           </p>
-          <p className="text-xs text-blue-600 dark:text-blue-400">
+          <p className="text-xs text-blue-400/80 font-mono">
             Email: demo@example.com
             <br />
             Password: password123

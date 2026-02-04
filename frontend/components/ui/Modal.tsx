@@ -54,7 +54,7 @@ export function Modal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -66,33 +66,33 @@ export function Modal({
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className={cn(
-                "relative w-full rounded-lg bg-white dark:bg-gray-900 shadow-xl",
-                "border border-gray-200 dark:border-gray-800",
+                "relative w-full rounded-xl bg-slate-900/90 backdrop-blur-xl shadow-2xl shadow-cyan-500/20",
+                "border border-cyan-500/30",
                 sizeClasses[size]
               )}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               {(title || description) && (
-                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+                <div className="px-6 py-4 border-b border-cyan-500/20">
                   <div className="flex items-start justify-between">
                     <div>
                       {title && (
-                        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+                        <h2 className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                           {title}
                         </h2>
                       )}
                       {description && (
-                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                        <p className="mt-1 text-sm text-cyan-300/60">
                           {description}
                         </p>
                       )}
                     </div>
                     <button
                       onClick={onClose}
-                      className="ml-4 rounded-md p-1 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                      className="ml-4 rounded-md p-1 hover:bg-cyan-500/10 transition-colors text-cyan-300 hover:text-cyan-200"
                     >
-                      <X className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                      <X className="h-5 w-5" />
                     </button>
                   </div>
                 </div>

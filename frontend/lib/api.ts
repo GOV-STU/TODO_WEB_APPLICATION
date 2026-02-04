@@ -265,6 +265,32 @@ class ApiClient {
     );
     return this.mapBackendTaskToFrontend(backendTask);
   }
+
+  // Chat API
+  async sendChatMessage(
+    content: string,
+    conversationId?: string | null
+  ): Promise<{
+    message_id: string;
+    role: string;
+    content: string;
+    created_at: string;
+    conversation_id: string;
+    tool_calls?: Array<{
+      tool_name: string;
+      status: string;
+    }>;
+  }> {
+    const payload: any = { message: content };
+    if (conversationId) {
+      payload.conversation_id = conversationId;
+    }
+
+    return this.request("/api/chat", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+  }
 }
 
 export const api = new ApiClient();

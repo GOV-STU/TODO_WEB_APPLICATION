@@ -1,13 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Menu } from "lucide-react";
-import { DarkModeToggle } from "./DarkModeToggle";
-import { Avatar } from "@/components/ui/Avatar";
+import { Search, Menu, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { MobileSidebar } from "./MobileSidebar";
 import { useState } from "react";
 import { auth } from "@/lib/auth";
+import { Neural3D } from "@/components/ui/Neural3D";
 
 export function Header() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -15,7 +14,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60">
+      <header className="sticky top-0 z-40 w-full border-b border-cyan-500/20 bg-slate-900/80 backdrop-blur-xl">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex h-14 md:h-16 items-center justify-between">
             {/* Left side */}
@@ -24,7 +23,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="md:hidden w-9 h-9 p-0 -ml-2"
+                className="md:hidden w-9 h-9 p-0 -ml-2 text-cyan-300 hover:text-cyan-200 hover:bg-cyan-500/10"
                 onClick={() => setMobileSidebarOpen(true)}
                 aria-label="Open menu"
               >
@@ -32,24 +31,34 @@ export function Header() {
               </Button>
 
               {/* Logo */}
-              <Link href="/" className="flex items-center gap-2">
-                <div className="h-7 w-7 md:h-8 md:w-8 rounded-lg bg-primary-600 dark:bg-primary-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-base md:text-lg">T</span>
+              <Link href="/dashboard" className="flex items-center gap-2 group">
+                <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 border border-cyan-400/30 group-hover:shadow-cyan-500/50 transition-all">
+                  <Zap className="h-5 w-5 text-white" />
                 </div>
-                <span className="font-bold text-lg md:text-xl text-gray-900 dark:text-gray-50">
-                  Todo
-                </span>
+                <div className="flex flex-col">
+                  <span className="font-bold text-sm md:text-base bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent leading-tight">
+                    TO DO WEB
+                  </span>
+                  <span className="font-bold text-xs md:text-sm bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent leading-tight -mt-0.5">
+                    APPLICATION
+                  </span>
+                </div>
               </Link>
+
+              {/* 3D Neural Network Animation - Desktop XL+ */}
+              <div className="hidden xl:flex items-center">
+                <Neural3D />
+              </div>
 
               {/* Search - Desktop */}
               <div className="hidden lg:flex items-center">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-cyan-400/60" />
                   <input
                     type="text"
-                    placeholder="Search tasks..."
+                    placeholder="Search neural database..."
                     aria-label="Search tasks"
-                    className="w-64 xl:w-80 h-9 pl-9 pr-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 text-sm text-gray-900 dark:text-gray-50 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600 dark:focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="w-64 xl:w-80 h-9 pl-9 pr-4 rounded-lg border border-cyan-500/30 bg-slate-800/50 text-sm text-cyan-100 placeholder:text-cyan-300/40 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400/50 transition-all"
                   />
                 </div>
               </div>
@@ -57,16 +66,12 @@ export function Header() {
 
             {/* Right side */}
             <div className="flex items-center gap-2 md:gap-3">
-              <DarkModeToggle />
-
-              {/* User Menu - Desktop */}
-              <div className="hidden md:flex items-center gap-3">
-                <Avatar
-                  src=""
-                  fallback={user?.name || "User"}
-                  size="sm"
-                  className="cursor-pointer hover:ring-2 hover:ring-primary-500 hover:ring-offset-2 transition-all"
-                />
+              {/* User Info - Desktop */}
+              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/50 border border-cyan-500/30">
+                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-lg shadow-cyan-500/30">
+                  {user?.name?.charAt(0).toUpperCase() || "U"}
+                </div>
+                <span className="text-sm text-cyan-100 font-medium">{user?.name || "Commander"}</span>
               </div>
             </div>
           </div>

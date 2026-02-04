@@ -145,10 +145,15 @@ export function TaskForm({
             variant="secondary"
             onClick={onClose}
             disabled={loading}
+            className="border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10"
           >
             Cancel
           </Button>
-          <Button type="submit" loading={loading}>
+          <Button
+            type="submit"
+            loading={loading}
+            className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 border border-cyan-400/30 shadow-lg shadow-cyan-500/20"
+          >
             {mode === "create" ? "Create Task" : "Save Changes"}
           </Button>
         </div>

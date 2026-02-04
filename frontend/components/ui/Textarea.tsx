@@ -53,15 +53,15 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           className={cn(
             "peer w-full min-h-[88px] px-4 pt-5 pb-1 rounded-md border transition-all duration-200 ease-premium resize-none",
-            "bg-white dark:bg-gray-900",
-            "text-gray-900 dark:text-gray-50",
+            "bg-slate-800/50",
+            "text-cyan-100",
             "placeholder-transparent",
-            "focus:outline-none focus:ring-2 focus:ring-offset-2",
+            "focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-400/50",
             error
-              ? "border-red-500 focus:ring-red-500 dark:border-red-400 dark:focus:ring-red-400"
+              ? "border-red-500 focus:ring-red-500"
               : success
-              ? "border-green-500 focus:ring-green-500 dark:border-green-400 dark:focus:ring-green-400"
-              : "border-gray-200 dark:border-gray-800 focus:ring-primary-600 dark:focus:ring-primary-500",
+              ? "border-green-500 focus:ring-green-500"
+              : "border-cyan-500/30",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             className
           )}
@@ -77,27 +77,27 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           <label
             className={cn(
               "absolute left-4 transition-all duration-200 ease-premium pointer-events-none",
-              "text-gray-600 dark:text-gray-400",
+              "text-cyan-300",
               isFocused || hasValue || props.value
                 ? "top-1.5 text-xs font-medium"
                 : "top-3 text-base",
               error
-                ? "text-red-500 dark:text-red-400"
+                ? "text-red-400"
                 : success
-                ? "text-green-500 dark:text-green-400"
-                : "peer-focus:text-primary-600 dark:peer-focus:text-primary-500"
+                ? "text-green-400"
+                : "peer-focus:text-cyan-400"
             )}
           >
             {label}
           </label>
         )}
         {showCount && maxLength && (
-          <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-400 text-right">
+          <p className="mt-1.5 text-xs text-cyan-300/60 text-right">
             {charCount} / {maxLength}
           </p>
         )}
         {error && (
-          <p className="mt-1.5 text-sm text-red-500 dark:text-red-400">
+          <p className="mt-1.5 text-sm text-red-400">
             {error}
           </p>
         )}

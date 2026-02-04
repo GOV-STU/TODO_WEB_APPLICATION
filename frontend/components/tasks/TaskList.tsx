@@ -10,6 +10,7 @@ interface TaskListProps {
   loading?: boolean;
   onToggleComplete?: (id: string) => void;
   onTaskClick?: (task: Task) => void;
+  onDelete?: (id: string) => void;
 }
 
 export function TaskList({
@@ -17,6 +18,7 @@ export function TaskList({
   loading,
   onToggleComplete,
   onTaskClick,
+  onDelete,
 }: TaskListProps) {
   if (loading) {
     return <LoadingSkeleton count={5} />;
@@ -34,6 +36,7 @@ export function TaskList({
           task={task}
           onToggleComplete={onToggleComplete}
           onClick={() => onTaskClick?.(task)}
+          onDelete={onDelete}
         />
       ))}
     </div>
