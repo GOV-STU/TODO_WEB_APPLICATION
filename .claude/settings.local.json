@@ -21,7 +21,10 @@
       "Bash(uvicorn:*)",
       "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MGM2MjhlMS02YTgxLTRhMGQtYWFlMC0wZTNjZGI0NzYwNDMiLCJlbWFpbCI6ImRlbW9AZXhhbXBsZS5jb20iLCJleHAiOjE3Njg5NzE0OTB9.a6QEgr5vqMkg94CNF9oSS3EU-QEwz1vjt_GouQf-Kaw\")",
       "Bash(tree:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git commit --amend --no-edit)",
+      "Bash(git push -u origin 001-ai-chat-integration)",
+      "Bash(git add history/prompts/001-ai-chat-integration/002-ai-chat-integration-planning.plan.prompt.md specs/001-ai-chat-integration/quickstart.md specs/001-ai-chat-integration/research.md)"
     ]
   }
 }
